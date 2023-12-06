@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>501</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 0, 0);</string>
+  </property>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>200</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+     <underline>true</underline>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 170, 0);</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>любой</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>драма</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>криминал</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>триллер</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>комедия</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>боевик</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>приключения</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>детектив</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>фэнтези</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>мелодрама</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>мультфильм</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>ужасы</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>биография</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>фантастика</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>вестерн</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_2">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>200</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 170, 0);</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>любой</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>&gt;2020</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2010-2020</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2000-2010</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1990-2000</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1980-1990</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1970-1980</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>&lt;1970</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_3">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 170, 0);</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>любая</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>США</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Великобритания</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Россия</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Франция</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Япония</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_4">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 170, 0);</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>любая</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>60 - 120 минут</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>120-180 минут</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>&gt;180 минут</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>20</y>
+     <width>461</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sitka Text Semibold</family>
+     <pointsize>26</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+     <strikeout>false</strikeout>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>Критерии поиска фильма</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>200</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>ЖАНР</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>СТРАНА</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>200</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>ГОД</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>320</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>ДЛИНА</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>-310</x>
+     <y>390</y>
+     <width>491</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../pictures/romb.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>-220</y>
+     <width>241</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../pictures/romb.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>-330</x>
+     <y>-200</y>
+     <width>471</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../pictures/romb.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>390</y>
+     <width>1111</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../pictures/romb.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>410</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI Variable Text Semibold</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255,163,26);</string>
+   </property>
+   <property name="text">
+    <string>Найти</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
