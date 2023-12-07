@@ -10,8 +10,9 @@ from ui_py_files.second_add_window import Ui_Form6
 from ui_py_files.success_window import Ui_Form7
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QFileDialog
-
-import random
+import multiprocessing
+from bot import send_message, bot_start
+import random 
 import sys
 import sqlite3
 from PIL import ImageFile
@@ -109,7 +110,7 @@ class mywindow(QtWidgets.QMainWindow):
         else:
             self.saiving_photo()
         self.data = (self.name, self.year, self.country, self.age, self.genre, self.rating, self.duration, actors, description, self.photo, url_trailer, url_watch)
-        print(self.data)
+        send_message(self.data)
         self.ui7.close()
         name = "film.sqlite"
         con = sqlite3.connect(name)
@@ -294,6 +295,8 @@ class mywindow8(QtWidgets.QMainWindow):
         self.ui8.setupUi(self)
 
 if __name__ == '__main__':
+    process = multiprocessing.Process(target=bot_start)
+    process.start()
     app = QtWidgets.QApplication(sys.argv)
     w = mywindow()
     w.show()
