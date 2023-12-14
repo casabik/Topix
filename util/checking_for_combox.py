@@ -1,6 +1,5 @@
 import sqlite3
 
-
 genre = dict()
 duration = dict()
 year = dict()
@@ -57,7 +56,7 @@ for i in durations:
         duration["3 hours"] += 1
 print("DURATIONS")
 for i in duration.keys():
-    print(i, duration[i]) 
+    print(i, duration[i])
 country = dict()
 countries = cur.execute(f"""SELECT country FROM films""").fetchall()
 countries = [item[0] for item in countries]

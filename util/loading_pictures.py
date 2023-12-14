@@ -1,9 +1,9 @@
 import requests
 import sqlite3
 from PIL import ImageFile
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from PIL import Image
-
 
 name = "film.sqlite"
 con = sqlite3.connect(name)

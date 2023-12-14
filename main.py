@@ -1,21 +1,5 @@
-from PyQt5 import QtWidgets, QtGui,QtCore
-from ui_py_files.main_window import Ui_MainWindow
-from ui_py_files.first_add_window import Ui_Form4
-from ui_py_files.choose_film_window import Ui_Form
-from ui_py_files.warning_window import Ui_Form5
-from PyQt5.QtGui import QDesktopServices
-from ui_py_files.list_of_films_window import Ui_Form2
-from ui_py_files.film_window import Ui_Form3
-from ui_py_files.second_add_window import Ui_Form6
-from ui_py_files.success_window import Ui_Form7
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QFileDialog
-import multiprocessing
-from bot import send_message, bot_start
-import random 
-import sys
-import sqlite3
-from PIL import ImageFile
+from requirments import *
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from PIL import Image
 
@@ -29,7 +13,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.close)
         self.ui.pushButton_2.clicked.connect(self.open_choose_film_window)
         self.ui.pushButton_2.clicked.connect(self.close)
-       
+
     def main_window(self, check):
         self.ui = mywindow()
         self.ui.show()
@@ -42,7 +26,6 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui5 = mywindow5()
         self.ui5.show()
         self.ui5.ui5.pushButton.clicked.connect(self.checking)
-
 
     def checking(self):
         if self.ui5.ui5.lineEdit.text() == "":
@@ -69,7 +52,7 @@ class mywindow(QtWidgets.QMainWindow):
             warning_text = "Вы не ввели жанр"
             self.ui6 = mywindow6(warning_text)
             self.ui6.show()
-            return False    
+            return False
         if self.ui5.ui5.lineEdit_6.text() == "":
             warning_text = "Вы не ввели рейтинг"
             self.ui6 = mywindow6(warning_text)
@@ -82,7 +65,6 @@ class mywindow(QtWidgets.QMainWindow):
             return False
         else:
             self.second_add_window()
-
 
     def second_add_window(self):
         self.name = self.ui5.ui5.lineEdit.text()
@@ -98,7 +80,6 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui7.ui7.pushButton_2.clicked.connect(self.add_image)
         self.ui7.ui7.pushButton.clicked.connect(self.success)
 
-
     def success(self):
         actors = self.ui7.ui7.lineEdit.text()
         description = self.ui7.ui7.lineEdit_2.text()
@@ -109,7 +90,9 @@ class mywindow(QtWidgets.QMainWindow):
             self.photo = ""
         else:
             self.saiving_photo()
-        self.data = (self.name, self.year, self.country, self.age, self.genre, self.rating, self.duration, actors, description, self.photo, url_trailer, url_watch)
+        self.data = (
+        self.name, self.year, self.country, self.age, self.genre, self.rating, self.duration, actors, description,
+        self.photo, url_trailer, url_watch)
         send_message(self.data)
         self.ui7.close()
         name = "film.sqlite"
@@ -134,11 +117,11 @@ class mywindow(QtWidgets.QMainWindow):
         img = img.resize((width, height))
         img.save(f"pictures_for_films/{self.name}.jpg")
         out.close()
-        
+
     def add_image(self):
         fname = QFileDialog.getOpenFileName(
-        self, 'Выбрать картинку', '',
-        'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
+            self, 'Выбрать картинку', '',
+            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
         if fname:
             self.ui7.ui7.pushButton_2.setText(fname)
             self.photo = fname
@@ -149,9 +132,10 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui2.ui2.pushButton.clicked.connect(self.open_show_films_window)
         self.ui2.ui2.pushButton.clicked.connect(self.ui2.close)
 
-         
     def open_show_films_window(self):
-        combo_text = {"genre": self.ui2.ui2.comboBox.currentText(), "years": self.ui2.ui2.comboBox_2.currentText(), "country": self.ui2.ui2.comboBox_3.currentText(), "duration": self.ui2.ui2.comboBox_4.currentText()}
+        combo_text = {"genre": self.ui2.ui2.comboBox.currentText(), "years": self.ui2.ui2.comboBox_2.currentText(),
+                      "country": self.ui2.ui2.comboBox_3.currentText(),
+                      "duration": self.ui2.ui2.comboBox_4.currentText()}
         film_names = self.db_search(combo_text)
         self.ui3 = mywindow3(film_names)
         self.ui3.show()
@@ -171,14 +155,14 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui3.ui3.pushButton_5.clicked.connect(lambda: self.film_window(self.ui3.ui3.pushButton_5.text()))
             self.ui3.ui3.pushButton_5.clicked.connect(self.ui3.close)
 
-
     def db_search(self, text):
         name = "film.sqlite"
         con = sqlite3.connect(name)
         cur = con.cursor()
         request = "SELECT * FROM films"
         count = 0
-        if text["genre"] != "любой" or text["years"] != "любой" or text["country"] != "любая" or text["duration"] != "любая":
+        if text["genre"] != "любой" or text["years"] != "любой" or text["country"] != "любая" or text[
+            "duration"] != "любая":
             request += " WHERE"
         if text["genre"] != "любой":
             request += f" genres LIKE '%{text['genre']}%'"
@@ -205,35 +189,37 @@ class mywindow(QtWidgets.QMainWindow):
                 beg = int(text["duration"].split("-")[0])
                 end = int(text["duration"].split("-")[1][:4])
                 request += f" duration >= {beg} AND duration <= {end}"
-            count += 1  
-        result  = cur.execute(request).fetchall()
+            count += 1
+        result = cur.execute(request).fetchall()
         result = [item[0] for item in result]
         random.shuffle(result)
         return result[:5]
-    
 
     def film_window(self, film):
         name = "film.sqlite"
         con = sqlite3.connect(name)
         cur = con.cursor()
-        request = f"SELECT * FROM films WHERE film LIKE '{film}'"
-        result  = list(cur.execute(request).fetchone())
+        request = f"""SELECT * FROM films WHERE film LIKE '{film}'"""
+        print(request)
+        result = list(cur.execute(request).fetchone())
         self.ui4 = mywindow4(result)
         self.ui4.show()
         self.ui4.ui4.pushButton_3.clicked.connect(lambda: self.main_window('ui4'))
-        if result [12] is not None:
+        if result[12] is not None:
             self.ui4.ui4.pushButton.clicked.connect(lambda: self.open_url(result[12]))
-        if result [13] is not None:
+        if result[13] is not None:
             self.ui4.ui4.pushButton_2.clicked.connect(lambda: self.open_url(result[13]))
 
     def open_url(self, url):
         QDesktopServices.openUrl(QUrl(url))
+
 
 class mywindow2(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow2, self).__init__()
         self.ui2 = Ui_Form()
         self.ui2.setupUi(self)
+
 
 class mywindow3(QtWidgets.QMainWindow):
     def __init__(self, film_names):
@@ -269,11 +255,13 @@ class mywindow4(QtWidgets.QMainWindow):
         self.ui4.textEdit.setText(film_params[9])
         self.ui4.textEdit_2.setText(film_params[10])
 
+
 class mywindow5(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow5, self).__init__()
         self.ui5 = Ui_Form4()
         self.ui5.setupUi(self)
+
 
 class mywindow6(QtWidgets.QMainWindow):
     def __init__(self, warning):
@@ -282,17 +270,20 @@ class mywindow6(QtWidgets.QMainWindow):
         self.ui6.setupUi(self)
         self.ui6.label.setText(warning)
 
+
 class mywindow7(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow7, self).__init__()
         self.ui7 = Ui_Form6()
         self.ui7.setupUi(self)
 
+
 class mywindow8(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow8, self).__init__()
         self.ui8 = Ui_Form7()
         self.ui8.setupUi(self)
+
 
 if __name__ == '__main__':
     process = multiprocessing.Process(target=bot_start)

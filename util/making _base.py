@@ -1,9 +1,11 @@
-import pandas as pd
-import sqlite3
 import chardet
-import csv 
+import csv
+import pandas as pd
 import requests
+import sqlite3
+
 from configuration.config import *
+
 
 class Make_base:
     def __init__(self):
@@ -25,7 +27,7 @@ class Make_base:
         url_picture = []
         url_trailer = []
         url_watch = []
-        
+
         for i in range(self.df.shape[0]):
             film = self.df.iloc[i]['Film']
             year = self.df.iloc[i]['Year']
@@ -72,7 +74,6 @@ class Make_base:
                     url_watch.append(None)
             else:
                 url_watch.append(None)
-            
 
         self.df.insert(1, 'rus_name', rus_name, False)
         self.df['type'] = type
@@ -93,36 +94,44 @@ class Make_base:
         response = response.json()
         return response
 
-
-    def find_film(self, access_token, film, year, language='English', limit=1): 
+    def find_film(self, access_token, film, year, language='English', limit=1):
         headers = {"X-API-KEY": access_token}
-        
-        fields = ['ageRating', 'name', 'type', 'countries', 'genres', 'rating', 'movieLength', 'persons', 'shortDescription', 'watchability', 'alternativeName', 'poster', 'videos', 'url']
+
+        fields = ['ageRating', 'name', 'type', 'countries', 'genres', 'rating', 'movieLength', 'persons',
+                  'shortDescription', 'watchability', 'alternativeName', 'poster', 'videos', 'url']
         print(language)
         if language == 'English':
-            responses = self.getjson("https://api.kinopoisk.dev/v1.3/movie", {'selectFields': fields, 'alternativeName': film, 'year' : year, 'limit': limit}, headers)
+            responses = self.getjson("https://api.kinopoisk.dev/v1.3/movie",
+                                     {'selectFields': fields, 'alternativeName': film, 'year': year, 'limit': limit},
+                                     headers)
         else:
-            responses = self.getjson("https://api.kinopoisk.dev/v1.3/movie", {'selectFields': fields, 'name': film, 'year' : year, 'limit': limit}, headers)
+            responses = self.getjson("https://api.kinopoisk.dev/v1.3/movie",
+                                     {'selectFields': fields, 'name': film, 'year': year, 'limit': limit}, headers)
         return responses
-    
+
     def tables(self):
         with sqlite3.connect('film.sqlite') as db:
             cursor = db.cursor()
-            query = """ CREATE TABLE IF NOT EXISTS films (film TEXT, rus_name TEXT, year INTEGER, type TEXT, country TEXT, age TEXT, genres TEXT, rating TEXT, duration TEXT, actors TEXT, description TEXT, url_picture TEXT, url_trailer TEXT, url_watch TEXT) """ 
+            query = """ CREATE TABLE IF NOT EXISTS films (film TEXT, rus_name TEXT, year INTEGER, type TEXT, country TEXT, age TEXT, genres TEXT, rating TEXT, duration TEXT, actors TEXT, description TEXT, url_picture TEXT, url_trailer TEXT, url_watch TEXT) """
             cursor.execute(query)
         db.close()
-    
+
     def info_for_tables(self):
         con = sqlite3.connect('film.sqlite')
         cur = con.cursor()
         with open('film.csv', 'rb') as f:
             encoding = chardet.detect(f.read())['encoding']
-        with open('film.csv','rt', encoding=encoding) as fin:
+        with open('film.csv', 'rt', encoding=encoding) as fin:
             dr = csv.DictReader(fin, delimiter=';')
-            to_db = [(i['Film'], i['rus_name'], i['Year'], i['type'], i['country'], i['age'], i['genres'], i['rating'], i['duration'], i['actors'], i['description'], i['url_picture'], i['url_trailer'], i['url_watch']) for i in dr]
-        cur.executemany("INSERT INTO films (film, rus_name, year, type, country, age, genres, rating, duration, actors, description, url_picture, url_trailer, url_watch) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", to_db)
+            to_db = [(i['Film'], i['rus_name'], i['Year'], i['type'], i['country'], i['age'], i['genres'], i['rating'],
+                      i['duration'], i['actors'], i['description'], i['url_picture'], i['url_trailer'], i['url_watch'])
+                     for i in dr]
+        cur.executemany(
+            "INSERT INTO films (film, rus_name, year, type, country, age, genres, rating, duration, actors, description, url_picture, url_trailer, url_watch) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+            to_db)
         con.commit()
         con.close()
+
 
 download = Make_base()
 download.add_information()
